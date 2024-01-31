@@ -1,0 +1,7 @@
+<?php
+
+$nome=$_POST['nome'];
+echo preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $nome ) );
+
+
+?>

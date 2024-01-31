@@ -1,0 +1,33 @@
+<?php
+require 'conn.php';
+
+?>
+
+
+<?
+
+
+$nome=$_SESSION['nome'];
+$nomeprime=$_SESSION['nomeget'];
+$figura=$_SESSION['image_perfil'];
+
+//$sql=mysql_query("SELECT*FROM audiencia ORDER BY where nome='$nome'");
+//$rows=mysql_num_rows($sql);
+//while($exibe=mysql_fetch_array($sql))
+//{
+	//$id=$exibe['id'];
+$visitou=$exibe['visitou'];
+$nome=$exibe['nome'];
+
+
+mysql_query("insert into audiencia(id,nome,visitou)values(null,'$nome','$nomeprime')");
+
+
+
+
+//mysql_query("insert into audiencia(id,nome,visitou)values(null,'$nome','$nomeprime')");
+//mysql_query("UPDATE audiencia set nome='$nome', visitou='$visitou' where visitou='$visitou'");
+
+
+
+?>

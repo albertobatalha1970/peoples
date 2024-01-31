@@ -1,0 +1,57 @@
+<?php
+include "conn.php";
+?>
+
+
+
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Meus Artigos</title>
+  <link rel="stylesheet" type="text/css" href="style/stylo.css">
+ </head>
+
+
+
+ <body>
+
+<table cellspacing="0" cellpadding="0" width="100%">
+
+
+<td width="" valign="top" align="left">
+
+
+  <?php
+
+$sql=mysql_query("select*from cadastros ORDER BY id ASC LIMIT 0,08")or die("Cadastros não foi selecionada");
+$rows=mysql_num_rows($sql);
+if($rows>0)
+{
+	while($exibe=mysql_fetch_array($sql))
+		{
+	     $id=$exibe['id'];
+		 $nome=$exibe['nome']; 
+		 $fone=$exibe['fone'];
+		 $picture='<img align="left" style="margin-right:5px" src="img/tel.png" width="20" height="21">';
+		 echo '<div style="background-color:none">';
+		 echo '<span style="color:#002e5b;font-size:18pt;font-weight:bold">'.$picture.$nome.': '.$fone.'<br>';
+         echo '</div>&nbsp;&nbsp;';
+
+		}
+	}
+?>
+
+</td>
+
+
+
+
+</table>
+
+ </body>
+</html>

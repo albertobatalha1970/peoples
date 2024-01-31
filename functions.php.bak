@@ -1,0 +1,374 @@
+
+<?php
+require 'conn.php';
+?>
+
+
+
+<?php
+
+
+
+
+
+
+function rows()
+{
+
+session_start();
+
+$nome=$_SESSION['nome'];
+$comentado=$nome;
+$sql=mysql_query("select*from comentados where comentado='$comentado'");
+//$rows=mysql_num_rows($sql);
+$rows=mysql_num_rows($sql);
+echo '<br><a href="inoff.php" class="link">Depoimentos</span><span>&nbsp;['.$rows.']</span></a><br><br>';
+		
+}
+
+
+
+
+
+
+function ccapa()
+{
+//session_start();
+$nome=$_SESSION['nome'];
+$pasta="capa/";
+//$id=$_SESSION['id'];
+$sql=mysql_query("select*from capa where nome='$nome' order by id DESC");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $imagecapa=$linha['imagecapa'];
+			   
+			   echo '<img src="'.$imagecapa.'" width="100%" height="150">';
+
+		}
+
+}
+
+
+
+
+
+
+
+
+function data()
+{
+	$data=date("d - m -y");
+echo'<br>'.$data;
+}
+
+
+
+
+//q.php
+
+
+function fone(){
+$nome=$_GET['nome'];
+$sql=mysql_query("select*from cadastros where nome='$nome' LIMIT 1");
+while($linha=mysql_fetch_array($sql))
+		{
+	    $fone=$linha['fone'];
+		echo '<span style="color:#003399;font-weight:bold"><br>'.$fone.'<br></span>';
+		//echo $nome;
+		}
+}
+
+
+
+
+//q.php
+
+
+
+function tdPerfil2(){
+	
+$nome=$_GET['nome'];
+$tipo=".jpg";
+$folder="perfil/";
+$imageget=$folder.$nome.$tipo;
+
+
+
+
+//session_start();
+$_SESSION['album']=$nome;
+
+
+
+$sql=mysql_query("select*from perfil where nome='$nome' LIMIT 1");
+while($linha=mysql_fetch_array($sql))
+		{
+			   
+			   $url = $_SERVER['REQUEST_URI'];
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $fone=$linha['fone'];
+			   $foto=$linha['foto'];
+			   $picture='<img alt="Ampliar" align="bottom" style="margin-left:3px;margin-right:3px" src="'.$foto.'" width="120" height="120">';
+
+			   
+
+			   $picture2='<img align="left" src="'.$imageget.'" width="20%" height="">';
+        
+				//session_start();
+			   $_SESSION['foto']=$picture2;
+			   $_SESSION['userget']=$nome;
+			   $_SESSION['url']=$url;
+
+
+
+            echo '<br>'.$picture;
+			
+			echo '<br><a href="#"><span style="color:#003399;font-size:12pt;font-weight:none"><br>'.ucfirst(strtolower($nome)).'</span><br><br></a>';
+			
+		
+        }   
+}
+
+
+
+
+
+function tdPerfil(){
+
+	
+	
+$nome=$_GET['nome'];
+$tipo=".jpg";
+$folder="perfil/";
+$imageget=$folder.$nome.$tipo;
+
+
+//session_start();
+$_SESSION['album']=$nome;
+
+
+
+$sql=mysql_query("select*from perfil where nome='$nome' LIMIT 1");
+while($linha=mysql_fetch_array($sql))
+		{
+			   
+			   $url = $_SERVER['REQUEST_URI'];
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $fone=$linha['fone'];
+			   $foto=$linha['foto'];
+			   $picture='<img alt="Ampliar" align="bottom" style="margin-left:3px;margin-right:3px" src="'.$foto.'" width="120" height="120">';
+
+			   
+
+			   $picture2='<img align="left" src="'.$imageget.'" width="20%" height="">';
+        
+				//session_start();
+			   $_SESSION['foto']=$picture2;
+			   $_SESSION['userget']=$nome;
+			   $_SESSION['url']=$url;
+
+
+
+            echo '<br>'.$picture;
+			
+			echo '<br><a href="#"><span style="color:#003399;font-size:12pt;font-weight:none"><br>'.ucfirst(strtolower($nome)).'</span><br><br></a>';
+			
+		
+        }   
+}
+        
+
+
+function exibePostagens(){
+
+$img=$_SESSION['foto'];
+
+	$nome=$_GET['nome'];
+		$_SESSION['nomeget']=$nome;
+			$sql=mysql_query("select*from comentar where nome='$nome' order by id DESC");
+				while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $coments=$linha['coments'];
+			   $mandante=$linha['mandante'];
+			   $data=$linha['data'];
+			   $hora=$linha['hora'];
+
+        
+            
+			echo '<fieldset style="width:300px;border:none;padding:0px;padding-right:0px;float:left">
+			<div style="margin-rigth:10px">';
+			echo $img;
+			echo '</div><fieldset style="padding-left:10px;border:none">
+			
+			<div><span style="text-align:left;color:#0033ff;font-size:10pt;font-weight:none;font-family: Verdana, Geneva, Arial, sans-serif;">'.ucwords($nome).'</div>';
+			
+			echo '<div style="color:#333333;font-size:10pt">'.$coments.'<span style="color:#9191ff;font-size:7pt;font-weight:none;font-family: sans-serif;Verdana, Geneva, Arial"><br>'.$data.'&nbsp;&nbsp;/ '.$hora.'</span><br><br></div></fieldset><br><br><br>';
+			
+			//echo '</div>';
+		echo '';
+        }    
+        
+		}		
+
+
+
+function comentados(){
+
+//session_start();
+
+$comentou=$_SESSION['nomeget'];
+$comentado=$_SESSION['nome'];
+$comentario=$_POST['comentario'];
+$imgcomentou='perfil/'.$comentou.'.jpg';
+$imgcomentado='perfil/'.$comentado.'.jpg';
+
+	//echo $comentado;
+	
+	//echo '<br>';
+
+	//echo $comentou;
+		$_SESSION['nomeget']=$nome;
+			$sql=mysql_query("select*from comentados where nome='$nome' order by id DESC");
+				while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $comentou=$linha['comentou'];
+			   $comentado=$linha['comentado'];
+			   $comentario=$linha['comentario'];
+        
+            
+			echo $id;
+		 }    
+        
+		}		
+
+
+
+
+function nomeCompleto(){
+
+
+//session_start();
+
+$nome=$_SESSION['nome'];
+$titular=$nome;
+
+
+
+$sql=mysql_query("select*from settings where titular='$titular'");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   			   echo '<span class="link"">'.$nome.'</span><br>';
+	 }
+}
+			   
+			
+
+
+
+
+
+
+
+
+
+
+
+
+function mensagensGet()
+{
+	
+//session_start();
+$nome=$_SESSION['nomeget'];
+$id=$_SESSION['id'];
+$sql=mysql_query("select*from comentar where nome='$nome' order by id DESC");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $coments=$linha['coments'];
+			   $mandante=$linha['mandante'];
+			   $data=$linha['data'];
+			   $hora=$linha['hora'];
+        
+
+
+			
+
+            
+			
+
+			echo '<div style="background-color:#ffffff;width:250px">';
+
+
+			echo $picture2.'<a href="#" style="text-align:left;color:#003399;font-size:10pt;font-weight:bold;font-family: Verdana, Geneva, Arial, sans-serif;"><i>'.ucwords($nome).':</i></a></span>';
+			
+			
+			
+			echo '</a><br><span style="text-align:left;color:#404040;font-size:9pt;font-weight:none;font-family: sans-serif;Verdana, Geneva, Arial">'.$coments.'<br><span style="text-align:left;color:#ff0000;font-size:7pt;font-weight:none;font-family: sans-serif;Verdana, Geneva, Arial">'.$data.'&nbsp;&nbsp;/ '.$hora.'</span>';
+
+			echo '</div>';
+
+			echo '<div class="excluir">';
+
+			echo '<a href="excluirmsg.php?id='.$id.'" style="text-decoration:none">excluir</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+			
+			echo '<a href="compartilhar.php?id='.$id.'&coments='.$coments.'&nome='.$nome.'" style="text-decoration:none">compartilhar</a><br><br><br>';
+			
+			
+
+			echo '</div>';
+
+
+
+
+
+
+
+
+        }    
+}
+    
+
+
+function editfone()
+{
+
+
+//session_start();
+
+$nome=$_SESSION['nome'];
+$sql=mysql_query("select*from cadastros where nome='$nome' LIMIT 1");
+while($linha=mysql_fetch_array($sql))
+		{	
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $fone=$linha['fone'];
+			   
+
+			echo '<a href="editnumber.php?&id='.$id.'"><span style="color:#003399;font-size:9pt;font-weight:none">editar</span></a><br><br>';
+			
+			
+			
+			
+
+        }    
+        
+    
+
+}
+
+
+
+
+?>
+
+

@@ -1,0 +1,57 @@
+<?php
+require 'conn.php';
+require 'functions.php';
+
+
+?>
+
+
+<?php 
+session_start();
+$nome =$_POST['nome']; 
+
+$senha = $_POST['senha']; 
+
+$_SESSION['nome']=$nome;
+$_SESSION['senha']=$senha;
+
+
+
+
+
+$sql="SELECT * FROM cadastros WHERE nome = '$nome' AND senha= '$senha'";
+$resultado=$conexao->query($sql);
+while($linha=$resultado->fetch_array(MYSQLI_BOTH))
+	{
+		$id=$linha['id'];
+        $_SESSION['id']=$id;
+	}
+
+if(mysql_num_rows ($result) > 0 ) 
+{ 
+
+$_SESSION['nome'] = $nome; 
+$_SESSION['senha'] = $senha; 
+
+require 'contador.php';
+
+//echo "Você está logado!".$_SESSION['nome'];
+
+header('location:http://localhost:8080/whatch.php'); 
+//include('whatch.php'); 
+} 
+else
+{
+unset ($_SESSION['nome']); 
+unset ($_SESSION['senha']); 
+unset ($_SESSION['id']); 
+
+//echo "Nada certo!";
+
+header('location:index.php'); 
+}
+
+?>
+
+
+

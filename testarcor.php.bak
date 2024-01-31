@@ -1,0 +1,51 @@
+<?php
+require 'conn.php';
+?>
+
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Mudar cor</title>
+ </head>
+ <body bgcolor="<? corResult();?>">
+  
+
+<?
+
+
+function corResult()
+{
+
+session_start();
+$nome=$_SESSION['nome'];
+
+echo $nome;
+
+
+$sql=mysql_query("SELECT*FROM background WHERE nome='$nome' order by id DESC");
+
+while($cor=mysql_fetch_array($sql))
+{ 
+	$id=$cor['id'];
+	$nome=$cor['nome'];
+	$color=$cor['color'];
+
+	echo $color;
+
+}
+
+}
+
+
+?>
+
+
+
+
+ </body>
+</html>

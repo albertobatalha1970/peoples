@@ -1,0 +1,45 @@
+.link{
+color:#333300;
+	text-decoration: none;
+	}
+.link:hover {
+color:#003366;
+	text-decoration: none; 
+	
+
+	}
+.link:active {
+	text-decoration: none;
+	}
+
+
+
+	.excluir
+{
+width:400px;
+font-size:7pt;
+color:#ffffff;
+text-align:left;
+text-decoration:none;
+font-weight:none;
+
+
+	
+}
+
+.excluir:hover{
+text-decoration:underline
+}
+
+.edit{
+    color:#dfdfdf;
+	text-decoration: none; 
+	
+	}
+
+	.edit:hover{
+    color:#003366;
+	text-decoration: none; 
+	
+
+	}

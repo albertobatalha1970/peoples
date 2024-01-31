@@ -1,0 +1,36 @@
+
+<?php
+require 'conn.php';
+?>
+
+
+<?php
+
+
+$id=$_POST['id'];
+$fone=$_POST['fone'];
+
+//echo $id;
+//echo $fone;
+
+
+
+if($sql=mysql_query("update cadastros set fone='$fone' where id='$id'"))
+{
+	echo 'Atualizado!';
+}
+else
+{
+	echo 'Nada feito';
+}
+
+
+        
+  
+header('location:whatch.php');
+
+
+
+?>
+
+

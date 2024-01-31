@@ -1,0 +1,41 @@
+<?php
+include "conn.php";
+?>
+<?php
+
+//session_start();
+
+//$nome=$_SESSION['nome'];
+//$sql=mysql_query("select*from status where nome='$nome' order by id DESC LIMIT 1");
+//while($linha=mysql_fetch_array($sql))
+
+
+
+
+
+
+$nome=$_SESSION['nome'];
+$sql="SELECT * FROM status where nome='".$nome."' order by id DESC LIMIT 1";
+$resultado=$conexao->query($sql);
+while($linha=$resultado->fetch_array(MYSQLI_BOTH))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $status=$linha['status'];
+			   
+
+			
+			
+
+
+			echo '<span style="color:#fffff;font-size:10pt;font-weight:bold">';
+			echo 'Pensamento de hoje:&nbsp;&nbsp;</span><span style="color:#ff3300;font-size:10pt;font-weight:none">
+			'.ucwords($status).'</span>';
+			echo '</span>';
+
+        }    
+        
+    
+
+
+?>

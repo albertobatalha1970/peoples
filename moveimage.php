@@ -1,0 +1,17 @@
+
+<?
+//$foto=$_POST['foto'];
+$foto=$_FILES['foto']['name'];
+$pasta="publicidade/";
+$duplo=$pasta.$foto;
+
+if(move_uploaded_file($_FILES['foto']['tmp_name'],$duplo))
+{
+	echo "Deu certo";
+}
+else
+{
+	echo "Deu errado";
+}
+
+?>

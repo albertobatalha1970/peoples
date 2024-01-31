@@ -1,0 +1,12 @@
+<?php
+require 'conn.php';
+session_start();
+$nome=$_SESSION['nome']==false;
+if(!$nome==false)
+{
+	header('location:index.php');
+	
+}
+
+
+?>

@@ -1,0 +1,7 @@
+Function validacao()
+{
+	if(document.form.nome.value="")
+	{
+		alert("Digite seu nome de usuario");
+	}
+}

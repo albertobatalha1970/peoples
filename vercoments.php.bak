@@ -1,0 +1,57 @@
+<?php
+include "conn.php";
+?>
+<?php
+
+session_start();
+
+$nome=$_SESSION['nome'];
+$sql=mysql_query("select*from cadastros where nome='$nome'");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $fone=$linha['fone'];
+			   $foto=$linha['foto'];
+			   $picture='<img alt="Ampliar" align="bottom" style="margin-left:3px;margin-right:3px" src="'.$foto.'" width="170" height="170">';
+        
+
+
+			//$img = WideImage::load('imagens/minha_foto.jpg');
+
+            echo '<br>'.$picture;
+			
+			echo '<span style="color:#006633;font-size:10pt;font-weight:bold"><br>'.ucfirst(strtolower($nome)).'</span><br><br>';
+			
+			
+
+
+			echo '<span style="color:#006633;font-size:10pt;font-weight:bold"><br>';
+			
+			echo '<img src="img/whats.png" width="50" height="50" align="bottom"><br>'.$fone.'<br></span>';
+
+
+        }    
+        
+    
+
+
+?>
+<br><br>
+<a href="whatch.php"><img src="img/home.png" width="50" height="49" align="bottom"></a>
+
+
+<br><br>
+<a href="logout.php"><img src="img/sair.jpg" width="50" height="50" align="bottom"></a>
+
+</td>
+
+
+
+<td style="padding-left:70px;padding-right:70px;border:10px;col0r:#00cc33" width="500" valign="top" align="left" height="550" bgcolor="ffffff">
+
+
+
+<br><br>
+
+<?php

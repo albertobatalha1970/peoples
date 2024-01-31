@@ -1,0 +1,56 @@
+<?php
+require 'conn.php';
+
+?>
+
+<html>
+<head>
+
+</head>
+<body>
+
+
+
+<?php
+
+$nome=$_SESSION['nome'];
+
+$sql="SELECT * FROM amigos WHERE nome='".$nome."'";
+$resultado=$conexao->query($sql);
+while($linha=$resultado->fetch_array(MYSQLI_BOTH))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $url=$linha['url'];
+			   
+			   $crop=substr($url, 12);
+			   $foto2='perfil/'.$crop.'.jpg';
+				
+			   $crop_name=substr($url, 12);
+
+
+              
+			   
+
+
+
+               $nome_cortado=substr($url, 12);
+
+               echo '<div style="float:left;width:58px;padding:1px;font-size:9pt"><a href="'.$url.'" style="text-decoration:none;margin-left:1px;margin-top:4px"><img title="'.$nome_cortado.'" src="'.$foto2.'" width="57" height="52" border="0"><br>';
+			   echo '<center>';
+			   echo $nome_cortado;
+			   echo '</center></a>';
+			   echo '</div>';
+	 
+	 
+	 
+	 
+	 
+	 }    
+?>
+
+
+
+
+</body>
+</html>

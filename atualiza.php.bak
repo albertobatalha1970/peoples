@@ -1,0 +1,25 @@
+<?php
+
+require 'conn.php';
+require 'functions.php';
+
+
+?>
+
+
+<?php
+session_start();
+
+$nome=$_SESSION['nomeget'];
+
+echo $nome;
+
+$sql=mysql_query("select*from amigos where nome='$nome'");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   
+			   echo $nome.'<br>';
+	 }
+?>

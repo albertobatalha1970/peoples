@@ -1,0 +1,15 @@
+<?php
+
+$sexo=$_POST['sexo'];
+
+if($sexo==masculino)
+
+{
+echo "Homem";
+}
+else
+{
+	echo "Menina";
+}
+
+?>

@@ -1,0 +1,302 @@
+<?php
+include "conn.php";
+?>
+
+<!doctype html>
+<html lang="en">
+ <head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Peoples: você sempre conectado</title>
+  <link rel="stylesheet" type="text/css" href="style/stylo.css">
+
+
+
+
+
+
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+
+
+
+
+
+ </head>
+
+
+
+ <body style="display:block!important;width:100%!important;z-index:2147483647!important;margin:0 auto!important;">
+
+
+ <table cellspacing="0" cellpadding="0" width="100%" align="center">
+
+
+
+<td width="400" height="" valign="top" align="center" style="color:#336600;font-size:10pt;background-color:#cc6633;padding:15px;
+ color: white;height:20px">
+
+
+
+
+<span style='font-size:10pt;color:#ffffff'>
+
+
+<form action="ver.php" method="post" style="margin-top:25px">
+  
+
+<img src="img/papo.png" width="50" height="49" align="bottom">
+
+
+<font style="color:#ffffff;font-size:32pt;font-weight:bold;">People's&nbsp;</font>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+  <input type="text" name="busca" value="" style="width:400px;background-color:#ffffff;border-color:#ffc6c6;color:#003366;font-weight:none;padding:5px;border-radius:5px;
+-webkit-border-radius:5px;
+-moz-border-radius:5px;"/>
+<input type="submit" value="Procurar alguém" style="color:#000000;height:31px;font-weight:none;font-size:10pt"/>
+
+
+
+
+</form>
+
+
+
+
+
+
+</span>
+
+
+
+
+
+
+
+
+
+</td>
+
+
+
+</table>
+
+
+<tr>
+
+
+<table cellspacing="0" cellpadding="0" width="100%" align="center">
+
+<td valign="top" align="center" style="color:#336600;font-size:10pt;background-color:#ffffff;padding:15px;
+ color:#000000;height:20px;width:170px">
+
+
+<?php
+
+session_start();
+
+$nome=$_SESSION['nome'];
+$sql=mysql_query("select*from perfil where nome='$nome' LIMIT 1");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $foto=$linha['foto'];
+			   $picture='<img alt="Ampliar" align="bottom" style="margin-left:3px;margin-right:3px" src="'.$foto.'" width="100" height="100">';
+			   $picture2='<img alt="Ampliar" align="left" style="margin-left:3px;margin-right:3px" src="'.$foto.'" width="30" height="30">';
+               $_SESSION['imageperfil']=$picture2;
+
+			
+
+            echo '<div style="background-color:#fffff;"><br><img src="img/sair.jpg" width="100" height="100" align="bottom"></div>';
+			echo '<span style="color:#cc6633;font-size:8pt;font-weight:none;text-decoration:none"><a href="perfil.php" style="text-decoration:none">Editar</a><br>';
+			echo '<span style="color:#cc6633;font-size:10pt;font-weight:none"><br>'.ucfirst(strtolower($nome)).'&nbsp;&nbsp;</span><br><br>';
+			
+			
+			
+			
+
+        }    
+        
+    
+
+
+?>
+
+
+
+<?php
+
+session_start();
+
+$nome=$_SESSION['nome'];
+$sql=mysql_query("select*from cadastros where nome='$nome'");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $fone=$linha['fone'];
+			   
+
+			
+			
+
+
+			echo '<span style="color:#cc6633;font-size:10pt;font-weight:none"><br>';
+			
+			echo '<img src="img/whats.png" width="50" height="50" align="bottom"><br><br></span>';
+			echo $fone.'<br></span>';
+
+        }    
+        
+    
+
+
+?>
+
+
+
+<br><br>
+<a href="album.php"><img src="img/album.jpg" width="50" height="49" align="bottom"></a>
+<br>
+<span style="color:#cc6633;font-size:10pt;font-weight:none">Imagens</span>
+
+<br><br>
+<!--<a href="whatch.php"><img src="img/home.png" width="50" height="49" align="bottom"></a>
+<br>
+<span style="color:#cc6633;font-size:10pt;font-weight:none">Anúncios</span>
+-->
+<br><br>
+<a href="logout.php"><img src="img/sair.jpg" width="50" height="50" align="bottom"></a>
+
+
+<br><br><br>
+</td>
+
+
+
+<td style="padding-left:70px;padding-right:0px;border:10px" width="500" valign="top" align="left" height="550" bgcolor="#ffffff">
+
+<br>
+
+
+
+<?php echo "<span style='color:#fd5200;align:right;'>Você está logado como <b>".$_SESSION['nome']."</b>. Agora compartilhe suas idéias com outras pessoas</span>";?>
+
+<br>
+
+<form name="searchform" action="comentarios.php" method="post" style="margin-top:15px">
+
+
+<input type="hidden" name="nome" value="<?php $_SESSION['nome'];?>" size="60">
+<br>
+<textarea name="coments" rows="4" cols="70"></textarea>
+
+<br>
+
+<input type="submit" value="Compartilhar">
+
+
+</form>
+<br><br>
+
+
+
+
+<?php
+
+echo '<span style="color:#fd5200;font-size:12pt;font-weight:none">';
+//echo 'ANÚNCIOS DE '.strtoupper($nome).'</span><br><br><br>';
+
+?>
+
+<?php
+session_start();
+$nome=$_SESSION['nome'];
+$sql=mysql_query("select*from comentar where nome='$nome' order by id DESC");
+while($linha=mysql_fetch_array($sql))
+		{
+			   $id=$linha['id'];
+		       $nome=$linha['nome'];
+			   $coments=$linha['coments'];
+			   $mandante=$linha['mandante'];
+        
+
+
+			
+
+            
+			
+
+
+			echo $mandante.'<span style="color:#003333;font-size:10pt;font-weight:none">';
+			
+			echo $picture2.$coments.'</span><br><br>';
+
+
+        }    
+        
+    
+
+
+?>
+
+
+
+
+
+</td>
+
+<td style="padding-left:0px;border:0px" width="100" valign="top" align="left" width="" height="550" bgcolor="#ffffff">
+<div style="background-color:#cc6600;color:#ffffff;text-align:center;width:200px;padding:2px;">
+
+<?php
+
+
+//$nome=$_GET['nome'];
+
+
+
+session_start();
+
+$nome=$_SESSION['nome'];
+
+$sql=mysql_query("select*from amigos where nome='$nome'");
+$rows=mysql_num_rows($sql);
+echo '<span style="font-size:9pt;">Amigos: '.'('.$rows.')<br>';
+			
+		
+
+?>
+
+
+
+</div>
+<br>
+<?php
+include "listamigos.php";
+?>
+
+
+
+
+
+</td>
+
+</tr>
+
+
+</table>
+
+ </body>
+</html>

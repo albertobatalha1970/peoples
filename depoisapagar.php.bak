@@ -1,0 +1,26 @@
+<?php
+include "conn.php";
+?>
+<head>
+
+
+</head>
+<?php
+
+
+
+
+
+
+session_start();
+
+$nome=$_SESSION['nomeget'];
+$visitante=$_SESSION['nome'];
+
+
+	echo $nome;
+	echo '<br>';
+	echo $visitante;
+
+
+?>
